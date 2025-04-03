@@ -16,18 +16,19 @@ import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
 import { reloadOnce } from './src/helpers/reloadOnce'
 import { isEmpty, pickBy } from 'lodash'
 import { SnowplowMediaPlugin } from '@snowplow/browser-plugin-media'
+import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 
 const createTrackerConfig = (cookieName) => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname)
-    ? 'docs2'
-    : 'test'
+    ? 'ai_demo'
+    : 'ai_demo'
   const domain = location.host.split('.').reverse()
 
   const trackerConfig = {
     appId,
     eventMethod: 'post',
-    plugins: [LinkClickTrackingPlugin(), SnowplowMediaPlugin()],
-    cookieDomain: `.${domain[1]}.${domain[0]}`,
+    plugins: [LinkClickTrackingPlugin(), SnowplowMediaPlugin(), FormTrackingPlugin()],
+    cookieDomain: `.jack.localhost`,
     cookieName,
     cookieSameSite: 'Lax',
     contexts: {
@@ -49,12 +50,15 @@ const createTrackerConfig = (cookieName) => {
 }
 
 const setupBrowserTracker = () => {
-  newTracker(
-    'snplow5',
-    'https://collector.snowplow.io',
-    createTrackerConfig('_sp5_')
-  )
-  newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
+  // newTracker(
+  //   'snplow5',
+  //   'https://collector.snowplow.io',
+  //   createTrackerConfig('_sp5_')
+  // )
+  // newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
+  newTracker('dev1', 'https://aws-sandbox-dev1.collector.snplow.net', createTrackerConfig('_sp_dev1_'))
+  newTracker('dev2', 'https://com-snplow-eng-aws-dev1.collector.snplow.net', createTrackerConfig('_sp_dev2_'))
+  newTracker('docs1', 'https://collector-sales-aws.snowplow.io', createTrackerConfig('_sp_docs1_'))
 
   const selectedTabContext = () => {
     const data = pickBy({
@@ -67,6 +71,7 @@ const setupBrowserTracker = () => {
     }
   }
   addGlobalContexts([selectedTabContext])
+  enableFormTracking();
 
   enableLinkClickTracking()
   enableActivityTracking({

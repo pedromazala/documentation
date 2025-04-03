@@ -31,6 +31,7 @@ module.exports = {
     require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
     require.resolve('./google.js'),
+    require.resolve('./src/components/Chatbot/index.js'),
   ],
 
   markdown: {
