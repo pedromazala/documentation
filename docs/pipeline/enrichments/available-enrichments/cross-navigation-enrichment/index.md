@@ -12,7 +12,9 @@ To add the `_sp` querystring, configure cross-domain tracking in the [web](/docs
 This enrichment expects the events to be base64-encoded. Configure this in the trackers.
 :::
 
-The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{platform}.{reason}`. If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`
+The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{platform}.{reason}`.
+
+If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the short format `_sp={domainUserId}.{timestamp}`
 
 ## Configuration
 
