@@ -9,17 +9,17 @@ const extTheme = extendTheme({
           main: '#6638b8',
         },
         background: {
-          default: '#F9FAFB',
+          default: '#f2f4f7',
         },
       },
     },
     dark: {
       palette: {
         primary: {
-          main: '#916CE7',
+          main: '#6638b8',
         },
         background: {
-          default: '#050505',
+          default: '#f2f4f7',
         },
       },
     },
